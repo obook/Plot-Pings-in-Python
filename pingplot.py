@@ -1,3 +1,32 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+'''
+Working under Linux
+Do not working under Win10
+Original source code from XXX (https://github.com/ccampo133/Plot-Pings-in-Python)
+
+Usage :
+    
+pingplot.py [options]
+
+Options:
+  -h, --help            show this help message and exit
+  -p, --plot            generates plot after data collection is finished
+  -f FILE, --file=FILE  save plot to FILE
+  -H HOST, --host=HOST  the url or ip address to ping [default: google.com]
+  -n N, --num=N         the number of packets to send on each ping iteration
+                        [default: 1]
+  -t DT, --dt=DT        the time interval (seconds) in which successive pings
+                        are sent [default: 0.5 s]
+  -l, --log             save a logfile of the event in the current directory.
+  -s SIZE, --size=SIZE  If plotting/saving a plot, this is the plot's
+                        dimensionsin pixels (at 80 DPI) in the format XxY
+                        [default: 1280x640]
+                        
+Example :
+
+pingplot.py -p -f free-plot.png -H free.fr 
+'''
 import numpy as np
 
 import os
@@ -127,7 +156,7 @@ def main(argv=None):
         timestr = "{0}h{1}m{2}s".format(nowtime.hour, nowtime.minute, nowtime.second)
         stamp   = datestr + "_" + timestr
         logname = "pingplot_v{vers:0.1}_{0}_{1}.log".format(opts.host, stamp, vers=__version__)  # remove all '.'
-        logfile = file(logname, 'w')
+        logfile = open(logname, 'w')
         logfile.write("PingPlot Version {0:0.1} - Log File\n\n\n".format(__version__))
     
     # start the main loop
